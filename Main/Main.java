@@ -80,6 +80,7 @@ class TranspositionCipher {
                 }
             }
 
+            fileReader.close();
             return content;
 
         } catch (IOException ioe) {
@@ -372,7 +373,7 @@ public class Main {
 
             case 11:
                 println("Rules for selecting a key : ");
-                println("1. Key is too long. Only allow cipher keys with length up to 10.");
+                println("1. Key shouldn't be too long, allowing cipher keys with length up to 10.");
                 println("2. It shouldn't have recurring numbers.");
                 println("3. Each digit of key must be within the range from 0 to the length of the key.");
                 println("refreshing in 5 seconds...");
@@ -389,7 +390,7 @@ public class Main {
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
         try {
             getMenu();
         } catch (IOException ioe) {
@@ -400,5 +401,4 @@ public class Main {
             exception.printStackTrace();
         }
     }
-
 }
