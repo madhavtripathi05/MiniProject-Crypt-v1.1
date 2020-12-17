@@ -19,7 +19,12 @@ class TranspositionCipher {
             // will throw an exception for non-numeric value
             int keyInInt = Integer.parseInt(key);
 
-            if (checkForRepeatedDigitInKey(key) && checkForMissingKeyValue(key)) {
+            /*if (checkForRepeatedDigitInKey(key) && checkForMissingKeyValue(key)) {
+                return true;
+            }*/
+
+            if(checkKeyDigits(key) && key.contains("0"))
+            {
                 return true;
             }
 
@@ -34,7 +39,7 @@ class TranspositionCipher {
         return false;
     }
 
-    public static boolean checkForMissingKeyValue(String key) {
+    /*public static boolean checkForMissingKeyValue(String key) {
         int keyLength = key.length();
 
         for (int i = 0; i < keyLength; i++) {
@@ -60,6 +65,25 @@ class TranspositionCipher {
             }
         }
         return true;
+    }*/
+
+    public static boolean checkKeyDigits(String key)
+    {
+    	int N = key.length();
+    	int sum = 0;
+    	int digit = 0;
+    	for (int i = 0; i < N; i++)
+    	{
+    		digit = Integer.parseInt(Character.toString(key.charAt(i)));
+    		sum += digit;
+    	}
+    	int expectedSum = ((N)*(N-1)/2);
+    	System.out.println(Integer.toString(sum));
+    	System.out.println(Integer.toString(expectedSum));
+    	if(sum == expectedSum)
+    		return true;
+    	else
+    		return false;
     }
 
     // function for reading a file
@@ -339,6 +363,14 @@ public class Main {
                 println("Enter Key : ");
                 key = scan.next();
 
+                if (!tCipher.checkKey(key)) {
+                    println("Incorrect Key check out option 11");
+                    println("refreshing in 3 seconds...");
+                    Thread.sleep(2000);
+                    break;
+                }
+                println("key is correct");
+
                 plainText = tCipher.readFromInputFile(inputFile);
                 encryptedText = tCipher.encryptUsingTransposition(plainText, key);
 
@@ -359,6 +391,14 @@ public class Main {
 
                 println("Enter Key : ");
                 key = scan.next();
+
+                if (!tCipher.checkKey(key)) {
+                    println("Incorrect Key check out option 11");
+                    println("refreshing in 3 seconds...");
+                    Thread.sleep(2000);
+                    break;
+                }
+                println("key is correct");
 
                 plainText = tCipher.readFromInputFile(inputFile);
                 decryptedText = tCipher.decryptUsingTransposition(plainText, key);
