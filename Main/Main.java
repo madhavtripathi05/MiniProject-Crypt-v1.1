@@ -74,6 +74,8 @@ class TranspositionCipher {
     	int digit = 0;
     	for (int i = 0; i < N; i++)
     	{
+            if(!key.contains(Integer.toString(i)))
+    			return false;
     		digit = Integer.parseInt(Character.toString(key.charAt(i)));
     		sum += digit;
     	}
